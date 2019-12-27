@@ -19,6 +19,11 @@ public class DocumentPraser {
         return document.select(selector);
     }
 
+    /**
+     * 通过rule规则解析获取合适的小说类型与对应的url
+     * @param eles
+     * @return
+     */
     public static HashMap<String ,String> getNovelTypeAndUrlByAElement(Elements eles){
         HashMap<String,String> map = new HashMap();
         for(Element element:eles){
@@ -30,6 +35,13 @@ public class DocumentPraser {
         return map;
     }
 
+    /**
+     * 通过主页url与选择器获取合适小说类型与url键值对
+     * @param homeUrl
+     * @param selector
+     * @return
+     * @throws IOException
+     */
     public static HashMap<String,String> getTypeAndUrl(String homeUrl,String selector) throws IOException {
         return getNovelTypeAndUrlByAElement(
                 getElementBySelector(
