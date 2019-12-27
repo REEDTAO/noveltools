@@ -13,15 +13,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/modules/article/bookcase.php");
         //System.out.println(doc.toString());
+        String Home_Url = "http://www.qbiqu.com";
         HashMap<String,String> typeAndUrl = DocumentPraser.getTypeAndUrl("http://www.qbiqu.com/", ".nav ul a");
 
         ArrayList<NovelSite> sites = new ArrayList<NovelSite>();
         for(String string:typeAndUrl.keySet()){
             NovelSite novelSite = new NovelSite();
-            novelSite.setSiteurl("http://www.qbiqu.com/");
+            novelSite.setSiteurl(Home_Url);
             novelSite.setNoveltype(string);
             novelSite.setCatchstatue("0");
-            novelSite.setNoveltypeurl(typeAndUrl.get(string));
+            novelSite.setNoveltypeurl(Home_Url+typeAndUrl.get(string));
+            sites.add(novelSite);
         }
         System.out.println(sites);
 
