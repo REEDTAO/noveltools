@@ -17,8 +17,6 @@ public class Main {
         //System.out.println(doc.toString());
         HashMap<String,String> typeAndUrl = DocumentPraser.getTypeAndUrl("http://www.qbiqu.com/", ".nav ul a");
 
-
-        typeAndUrl.values();
         for(String string:typeAndUrl.keySet()){
             System.out.println(string+"  "+typeAndUrl.get(string));
         }
