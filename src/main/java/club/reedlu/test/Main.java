@@ -1,8 +1,11 @@
 package club.reedlu.test;
 
+import club.reedlu.NovelSelectorConfig;
+import club.reedlu.pojo.NovelInfo;
 import club.reedlu.pojo.NovelSite;
 import club.reedlu.utils.DocumentPraser;
 import club.reedlu.utils.DocumentUtils;
+import club.reedlu.utils.NovelListCatch;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +14,19 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/modules/article/bookcase.php");
-        //System.out.println(doc.toString());
+        Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/kehuanxiaoshuo");
+        System.out.println(doc.toString());
+
+        NovelListCatch  listCatch = new NovelListCatch();
+        NovelSelectorConfig novelSelectorConfig = new NovelSelectorConfig();
+        novelSelectorConfig.setNovelNameSelector(".s2 a");
+        novelSelectorConfig.setAuthorSelector(".s5");
+        listCatch.setConfig(novelSelectorConfig);
+        ArrayList<NovelInfo> novelInfos = listCatch.getNovelInfo(doc);
+        System.out.println(novelInfos);
+
+
+        /*
         String Home_Url = "http://www.qbiqu.com";
         HashMap<String,String> typeAndUrl = DocumentPraser.getTypeAndUrl("http://www.qbiqu.com/", ".nav ul a");
 
@@ -26,6 +40,6 @@ public class Main {
             sites.add(novelSite);
         }
         System.out.println(sites);
-
+         */
     }
 }

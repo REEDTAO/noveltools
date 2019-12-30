@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class NovelInfo {
     Integer id;
-    String title;
+    String url;
     String name;
     String author;
     String description;
