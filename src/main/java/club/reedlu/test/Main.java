@@ -30,6 +30,7 @@ public class Main {
 
 
 
+
         /*
         String Home_Url = "http://www.qbiqu.com";
         HashMap<String,String> typeAndUrl = DocumentPraser.getTypeAndUrl("http://www.qbiqu.com/", ".nav ul a");
