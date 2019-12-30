@@ -14,16 +14,20 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/kehuanxiaoshuo");
+        Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/kehuanxiaoshuo/6_104.html");
         System.out.println(doc.toString());
 
         NovelListCatch  listCatch = new NovelListCatch();
         NovelSelectorConfig novelSelectorConfig = new NovelSelectorConfig();
         novelSelectorConfig.setNovelNameSelector(".s2 a");
         novelSelectorConfig.setAuthorSelector(".s5");
+        novelSelectorConfig.setNovelListNextSelector(".next");
         listCatch.setConfig(novelSelectorConfig);
         ArrayList<NovelInfo> novelInfos = listCatch.getNovelInfo(doc);
         System.out.println(novelInfos);
+        System.out.println(listCatch.getNextListUrl(doc));
+
+
 
 
         /*
