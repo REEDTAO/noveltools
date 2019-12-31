@@ -2,7 +2,6 @@ package club.reedlu;
 
 
 import lombok.Data;
-import org.jsoup.nodes.Element;
 
 @Data
 public class NovelSelectorConfig {
