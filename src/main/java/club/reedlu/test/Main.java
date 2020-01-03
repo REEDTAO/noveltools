@@ -1,9 +1,12 @@
 package club.reedlu.test;
 
 import club.reedlu.NovelSelectorConfig;
+import club.reedlu.database.DatabaseUtils;
+import club.reedlu.database.mapper.NovelInfoMapper;
 import club.reedlu.pojo.NovelInfo;
 import club.reedlu.utils.DocumentUtils;
 import club.reedlu.utils.NovelListCatch;
+import org.apache.ibatis.session.SqlSession;
 import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,20 +15,19 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/kehuanxiaoshuo/6_104.html");
-        System.out.println(doc.toString());
+//        Document doc = DocumentUtils.getDocumentByUrl("http://www.qbiqu.com/xuanhuanxiaoshuo/1_10.html");
+//        System.out.println(doc.toString());
 
         NovelListCatch  listCatch = new NovelListCatch();
 
         NovelSelectorConfig novelSelectorConfig = new NovelSelectorConfig();
-        novelSelectorConfig.setNovelNameSelector(".s2 a");
+        novelSelectorConfig.setNovelNameSelector("#newscontent .l .s2 a");
         novelSelectorConfig.setAuthorSelector(".s5");
         novelSelectorConfig.setNovelListNextSelector(".next");
         listCatch.setConfig(novelSelectorConfig);
 
-        ArrayList<NovelInfo> novelInfos = listCatch.getNovelInfo(doc);
-        System.out.println(novelInfos);
-        System.out.println(listCatch.getNextListUrl(doc));
+
+        saveNovel(listCatch);
 
         /*
         String Home_Url = "http://www.qbiqu.com";
@@ -42,5 +44,27 @@ public class Main {
         }
         System.out.println(sites);
          */
+    }
+
+    private static void saveNovel(NovelListCatch listCatch) throws IOException {
+        String nextUrl = "http://www.qbiqu.com/xuanhuanxiaoshuo/";
+
+        while(!nextUrl.equals("")){
+            SqlSession sqlSession = DatabaseUtils.getSqlSessionFactory().openSession();
+            NovelInfoMapper mapper = sqlSession.getMapper(NovelInfoMapper.class);
+            System.out.println("读取url："+nextUrl);
+            Document doc = DocumentUtils.getDocumentByUrl(nextUrl);
+
+            ArrayList<NovelInfo> novelInfos = listCatch.getNovelInfo(doc,nextUrl);
+            System.out.println("解析成功，获取记录条数:"+novelInfos.size());
+            mapper.saveNovelInfoList(novelInfos);
+
+            System.out.println("保存成功");
+            nextUrl = listCatch.getNextListUrl(doc);
+            sqlSession.commit();
+            sqlSession.close();
+
+        }
+
     }
 }
