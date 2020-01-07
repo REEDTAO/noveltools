@@ -36,11 +36,23 @@ public class NovelListCatch {
 
     /**
      * 获取下一页url
-     * @param doc
-     * @return
+     * @param doc 文档对象
+     * @return 返回下页列表url
      */
     public String  getNextListUrl(Document doc){
         Elements select = doc.select(config.getNovelListNextSelector());
+        return  select.size()>0?
+                doc.select(config.getNovelListNextSelector()).get(0).attr("href"):
+                "";
+    }
+
+    /**
+     * 获取下一章详细内容url
+     * @param doc 文档对象
+     * @return 返回下一章url
+     */
+    public String getNexeChapterUrl(Document doc){
+        Elements select = doc.select(config.getNextUrlSelector());
         return  select.size()>0?
                 doc.select(config.getNovelListNextSelector()).get(0).attr("href"):
                 "";
