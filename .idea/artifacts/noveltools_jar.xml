@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="noveltools:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/noveltools_jar</output-path>
+    <root id="archive" name="noveltools.jar">
+      <element id="module-output" name="noveltools" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.18/mysql-connector-java-8.0.18.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.12.1/jsoup-1.12.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.5.3/mybatis-3.5.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.12.1" />
+      <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.3" />
+      <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.18" />
+      <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+    </root>
+  </artifact>
+</component>
