@@ -1,6 +1,7 @@
 package club.reedlu.utils;
 
 import club.reedlu.NovelSelectorConfig;
+import club.reedlu.pojo.Chapterdetail;
 import club.reedlu.pojo.NovelInfo;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -56,6 +57,24 @@ public class NovelListCatch {
         return  select.size()>0?
                 doc.select(config.getNovelListNextSelector()).get(0).attr("href"):
                 "";
+    }
+
+    /**
+     * 获取章节内容和标题
+     * @param detail 小说章节详情，传入对象需要包含novelId，小说章节url
+     * @param document 小说章节文档对象
+     * @return 返回填充title 和content 的小说详情对象
+     */
+    public Chapterdetail getContentAndTitle(Chapterdetail detail,Document document){
+        Element content = document.select(config.getContentSelector()).get(0);
+        Element title = document.select(config.getTitleSelector()).get(0);
+        if(content!=null){
+            detail.setContent(content.text());
+        }
+        if(title!=null){
+            detail.setTitle(title.text());
+        }
+        return detail;
     }
 
     public void setConfig(NovelSelectorConfig config){

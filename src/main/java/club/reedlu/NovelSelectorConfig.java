@@ -22,7 +22,7 @@ public class NovelSelectorConfig {
     //小说章节
     String titleSelector;//小说章节标题选择器
     String urlSelector;//小说章节链接选择器
-    String content;//小说内容选择器
+    String contentSelector;//小说内容选择器
     String nextUrlSelector;//小说下一章链接选择器
 
 
